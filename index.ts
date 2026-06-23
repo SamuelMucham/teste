@@ -44,7 +44,7 @@ export function ehPar(number: number){
     return "É impar!";
 }
 
-export function maior(number1: number, number2: number, p0: number, p1: number){
+export function maior(number1: number, number2: number){
     if (number1 > number2){
         return number1;
     }
