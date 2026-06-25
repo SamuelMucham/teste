@@ -1,199 +1,223 @@
-export function soma(number1: number, number2: number){
-     if(typeof number1 !== "number" || typeof number2 !== "number"){
-        return"Me envie números!";
-    }
-    return number1 + number2;
-}
-
-export function fibonacci(quantity: number){
-    if (quantity === 0){
-        return [];
-    }
-
-    if (quantity < 0){
-        return "Me envie um número positivo!";
-    }
-
-    if (quantity === 1){
-        return [1];
-    }
-    if (quantity % 1 ){
-        return "Me envie um número inteiro!";
-    }
-
-    if (quantity > 50){
-        return "me de um número menor ou igual a 50!";
-    }
-
-    const sequencia = [1, 1];
-  for (let i = 2; i < quantity; i++) {
-    sequencia.push(sequencia[i - 1]! + sequencia[i - 2]!);
+export function soma(number1: number, number2: number) {
+  if (typeof number1 !== "number" || typeof number2 !== "number") {
+    return "Me envie números!";
   }
-  return sequencia;
+
+  return number1 + number2;
 }
 
-export function media(number1: number, number2: number){
-    const media = (number1 + number2) /2;
-    return media;
+export function fibonacci(quantity: number) {
+  if (quantity < 0) return "Me dê um número positivo!";
+  if (!Number.isInteger(quantity)) return "Me dê um número inteiro!";
+  if (quantity > 50) return "Me dê um número menor ou igual a 50";
+
+  const resultado: number[] = [];
+
+  if (quantity === 0) return resultado;
+
+  resultado.push(1);
+
+  if (quantity === 1) return resultado;
+
+  resultado.push(1);
+
+  for (let i = 2; i < quantity; i++) {
+    resultado.push(resultado[i - 1]! + resultado[i - 2]!);
+  }
+
+  return resultado;
 }
 
-export function ehPar(number: number){
-    if (number % 2 === 0){
-        return "É par!";
-    }
-    return "É impar!";
+export function media(number1: number, number2: number) {
+  return (number1 + number2) / 2;
 }
 
-export function maior(number1: number, number2: number){
-    if (number1 > number2){
-        return number1;
-    }
-    return number2;
+export function ehPar(numero: number) {
+  if (!Number.isFinite(numero)) {
+    return "Me passe um número finito";
+  }
+
+  return numero % 2 === 0;
 }
 
-export function menor(number1: number, number2: number){
-    if (number1 < number2){
-        return number1;
-    }
-    return number2;
+export function maior(numero1: number, numero2: number) {
+  if (numero1 === numero2) return "Números iguais";
+
+  return numero1 > numero2 ? numero1 : numero2;
 }
 
-export function aprovado(nota: number){
-    if (nota >= 9 && nota <= 10){
-        return "Aprovado";
-    }
-    return "Reprovado";
+export function menor(numero1: number, numero2: number) {
+  if (numero1 === numero2) return "Números iguais";
+
+  return numero1 < numero2 ? numero1 : numero2;
 }
 
-export function categoriaIdade(idade: number){
-    if (idade >= 18 && idade <= 25){
-        return "Adolescente";
-    }
-    if (idade >= 26 && idade <= 35){
-        return "Adolescente";
-    }
-    if (idade >= 36 && idade <= 45){
-        return "Adolescente";
-    }
+export function aprovado(nota: number) {
+  if (nota < 0) return "Me dê uma nota positiva";
+  if (nota > 10) return "Me dê uma nota válida";
+
+  return nota >= 7 ? "Aprovado" : "Reprovado";
 }
 
-export function contarCaracter(texto: string, letra: string){
-     let contador = 0;
-     for (let i = 0; i < texto.length; i++) {
-        if (texto[i] === letra){
-            contador++;
-        }
-     }
-     
-      console.log(contador);
-      return contador;
+export function categoriaIdade(idade: number) {
+  if (idade < 0) return "Me dê uma idade positiva";
+  if (!Number.isInteger(idade)) return "Me dê uma idade inteira";
+
+  if (idade <= 2) return "Bebê";
+  if (idade <= 12) return "Criança";
+  if (idade <= 17) return "Adolescente";
+  if (idade <= 59) return "Adulto";
+  if (idade <= 110) return "Idoso";
+
+  return "Defunto";
 }
 
-export function inverter(texto: string){
-    let textoInverso = "";
-    for (let i = texto.length - 1; i >= 0; i--) {
-        textoInverso += texto[i];
-    }
-    return textoInverso;
+export function contarCaracteres(texto: string, letra: string) {
+  if (letra.length !== 1) {
+    return "Me dê um caracter para verificar a quantidade";
+  }
+
+  let contador = 0;
+
+  for (const caractere of texto) {
+    if (caractere === letra) contador++;
+  }
+
+  return contador;
 }
 
-export function contarVogais(texto: string){
-    let vogais = 0;
-    for (let i = 0; i < texto.length; i++) {
-        if (texto[i] === "a" || texto[i] === "e" || texto[i] === "i" || texto[i] === "o" || texto[i] === "u"){
-            vogais++;
-        }
-    }
-    // console.log(vogais);
-    return vogais;
+export function inverter(texto: string) {
+  if (texto === "") return "Me dê uma string";
+  if (texto.length < 2) {
+    return "Me dê uma string com no mínimo 2 caracteres";
+  }
+
+  return texto.split("").reverse().join("");
 }
 
-export function somatorio(numeros: number[]){
-    let soma = 0;
-    for (let i = 0; i < numeros.length; i++) {
-        soma += numeros[i];
-    }
-    return soma;
+export function contarVogais(texto: string) {
+  const vogais =
+    "aeiouAEIOUáéíóúâêîôûàèìòùãõÁÉÍÓÚÂÊÎÔÛÀÈÌÒÙÃÕ";
+
+  let contador = 0;
+
+  for (const letra of texto) {
+    if (vogais.includes(letra)) contador++;
+  }
+
+  return contador;
 }
 
-export function maiorDaLista(numeros: number[]){
-    let maior = numeros[0];
-    for (let i = 1; i < numeros.length; i++) {
-        if (numeros[i] > maior){
-            maior = numeros[i];
-        }
-    }
-    return maior;
+export function somatorio(numeros: number[]) {
+  return numeros.reduce((acc, numero) => acc + numero, 0);
 }
 
-export function mediaDaLista(numeros: number[]){
-    let media = 0;
-    for (let i = 0; i < numeros.length; i++) {
-        media += numeros[i];
-    }
-    media /= numeros.length;
-    return media;
+export function maiorDaLista(numeros: number[]) {
+  if (numeros.length === 0) return "Me dê números";
+
+  return Math.max(...numeros);
 }
 
-export function contagemRegressiva(quantidade: number){
-    let contagem = 0;
-    for (let i = 1; i <= quantidade; i++) {
-        contagem += i;
-    }
-    return contagem;
+export function mediaDaLista(numeros: number[]) {
+  if (numeros.length === 0) {
+    return "Me dê números";
+  }
+
+  const media =
+    numeros.reduce((acc, numero) => acc + numero, 0) /
+    numeros.length;
+
+  return Number(media.toFixed(10));
 }
 
-export function fatorial(numero: number){ 
-    let fatorial = 1;
-    for (let i = 1; i <= numero; i++) {
-        fatorial *= i;
-    }
-    return fatorial;
+export function contagemRegressiva(quantidade: number) {
+  if (quantidade < 0) return "Me dê um número positivo";
+  if (!Number.isInteger(quantidade)) {
+    return "Me dê um número inteiro";
+  }
+
+  const resultado: number[] = [];
+
+  for (let i = quantidade; i >= 0; i--) {
+    resultado.push(i);
+  }
+
+  return resultado;
 }
 
-export function ehPalindromo(texto: string){
-    let textoReverso = "";
-    for (let i = texto.length - 1; i >= 0; i--) {
-        textoReverso += texto[i];
-    }
-    if (texto === textoReverso){
-        return true;
-    }
-    return false;
+export function fatorial(numero: number) {
+  if (numero < 0) {
+    return "Me dê um número maior ou igual a 0";
+  }
+
+  if (!Number.isInteger(numero)) {
+    return "Me dê um número inteiro";
+  }
+
+  if (numero > 170) {
+    return "Me dê um número menor ou igual a 170";
+  }
+
+  let resultado = 1;
+
+  for (let i = 2; i <= numero; i++) {
+    resultado *= i;
+  }
+
+  return resultado;
 }
 
-export function ehPrimo(numero: number){
-    if (numero === 1){
-        return false;
-    }
-    for (let i = 2; i <= Math.sqrt(numero); i++) {
-        if (numero % i === 0){
-            return false;
-        }
-    }
-    return true;
+export function ehPalindromo(texto: string) {
+  if (texto === "") {
+    return "Me dê uma palavra para verificar";
+  }
+
+  const limpo = texto.toLowerCase().replace(/\s/g, "");
+
+  return limpo === limpo.split("").reverse().join("");
 }
 
-export function removerDuplicados(texto: string){
-    const array = texto.split("");
-    const arrayUnico = [...new Set(array)];
-    return arrayUnico.join("");
+export function ehPrimo(numero: number) {
+  if (numero < 0) {
+    return "Me dê um número maior ou igual a 0";
+  }
+
+  if (!Number.isInteger(numero)) {
+    return "Me dê um número inteiro";
+  }
+
+  if (numero < 2) return false;
+
+  for (let i = 2; i <= Math.sqrt(numero); i++) {
+    if (numero % i === 0) return false;
+  }
+
+  return true;
 }
 
-export function ordemAlfabetica(texto: string){
-    const array = texto.split("");
-    array.sort();
-    return array.join("");
+export function removerDuplicados(texto: string) {
+  if (texto === "") return "Me dê caracteres";
+
+  const semEspacos = texto.replace(/\s/g, "");
+
+  return [...new Set(semEspacos)].join("");
 }
 
-export function contarPalavras(texto: string){
-    const array = texto.split(" ");
-    let contador = 0;
-    for (let i = 0; i < array.length; i++) {
-        if (array[i].length > 0){
-            contador++;
-        }
-    }
-    console.log(contador);
-    return contador;
+export function ordemAlfabetica(texto: string) {
+  if (texto === "") return "Me dê caracteres";
+
+  return texto
+    .replace(/\s/g, "")
+    .toLowerCase()
+    .split("")
+    .sort()
+    .join("");
+}
+
+export function contarPalavras(texto: string) {
+  const limpo = texto.trim();
+
+  if (limpo === "") return 0;
+
+  return limpo.split(/\s+/).length;
 }
